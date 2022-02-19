@@ -13,7 +13,7 @@ public class HelloWorldController {
     @GetMapping(value = "/hello", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String sayHello() {
-        return "<h1>Hello  World</h1>";
+        return "<h1>Hello World</h1>";
     }
 
     @GetMapping(value = "/hallo", produces = MediaType.TEXT_HTML_VALUE)
