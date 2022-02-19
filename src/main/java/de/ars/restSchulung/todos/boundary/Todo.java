@@ -1,9 +1,13 @@
 package de.ars.restSchulung.todos.boundary;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
+@Entity
 public class Todo {
 
+    @Id
     private String uuid;
     private String name;
     private int prioritaet;
