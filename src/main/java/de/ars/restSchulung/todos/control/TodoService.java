@@ -22,5 +22,12 @@ public class TodoService {
         return todos;
     }
 
-
+    public void loechen(String id) {
+        for (Todo todo : todos) {
+            if (todo.getUuid().equals(id)) {
+                todos.remove(todo);
+                return;
+            }
+        }
+    }
 }

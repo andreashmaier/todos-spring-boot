@@ -25,6 +25,7 @@
                 <tr>
                     <td>Name</td>
                     <td>Priorität</td>
+                    <td>Aktion</td>
                 </tr>
                 </thead>
                 <c:forEach items="${todos}" var="todo">
@@ -32,6 +33,7 @@
                     <tr>
                         <td><c:out value="${todo.name}"/></td>
                         <td><c:out value="${todo.prioritaet}"/></td>
+                        <td><a class="btn btn-danger" href="loeschen?id=${todo.uuid}">Löschen</a></td>
                     </tr>
                     </tbody>
                 </c:forEach>
