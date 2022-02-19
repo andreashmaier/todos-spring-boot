@@ -3,6 +3,7 @@ package de.ars.restSchulung.todos.boundary;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,4 +21,11 @@ public class HelloWorldController {
     public String sagHallo(@RequestParam(defaultValue = "") String name) {
         return "Hallo " + name;
     }
+
+    @PostMapping(value = "/login")
+    @ResponseBody
+    public String test(@RequestParam String name) {
+        return "Hallo " + name;
+    }
+
 }
