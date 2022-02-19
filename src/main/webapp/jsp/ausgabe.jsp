@@ -38,6 +38,7 @@
                     </tbody>
                 </c:forEach>
             </table>
+            <a class="btn btn-success" href="/erstellen.html">Neues Todo erstellen</a>
         </c:otherwise>
     </c:choose>
 

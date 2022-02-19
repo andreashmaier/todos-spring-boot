@@ -25,4 +25,8 @@ public class TodoService {
     public void loechen(String id) {
         todos.removeIf(todo -> todo.getUuid().equals(id));
     }
+
+    public void einfuegen(Todo todo) {
+        todos.add(todo);
+    }
 }
