@@ -8,11 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import java.util.Set;
+
 @Controller
 public class TodoController {
 
     @Autowired
     private TodoService todoService;
+
+    @Autowired
+    private Validator validator;
 
     @GetMapping(value = "/todos")
     public String findAll(Model model) {
@@ -26,11 +33,28 @@ public class TodoController {
         return "redirect:/todos";
     }
 
+    @GetMapping(value = "/erstelle")
+    public String erstelle() {
+        return "erstellen";
+    }
+
     @PostMapping(value = "erstelleTodo")
-    public String erstelleTodo(@RequestParam String name, @RequestParam String prio) {
+    public String erstelleTodo(@RequestParam String name, @RequestParam String prio, Model model) {
         System.out.println("name = " + name + ", prio = " + prio);
-        todoService.einfuegen(new Todo(name, Integer.parseInt(prio)));
-        return "redirect:/todos";
+        Todo todo = new Todo(name, Integer.parseInt(prio));
+        Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
+        String message = "";
+        for (ConstraintViolation<Todo> violation : violations) {
+            System.out.println(violations);
+            message += violation.getMessage() + " ";
+        }
+        if (!violations.isEmpty()) {
+            model.addAttribute("message", message);
+            return "erstellen";
+        } else {
+            todoService.einfuegen(todo);
+            return "redirect:/todos";
+        }
     }
 
 }
