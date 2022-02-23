@@ -43,6 +43,11 @@
         <!--            <version>0.30</version>-->
         <!--        </dependency>-->
 
+        <!-- Bean Validaton -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <!-- Datenbank -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
