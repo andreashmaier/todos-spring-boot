@@ -1,18 +1,29 @@
 package de.ars.restSchulung.todos.boundary;
 
+import de.ars.restSchulung.todos.control.Bremse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloWorldController {
 
+    @Autowired
+    @Qualifier(value = "Scheibenbremse")
+    private Bremse bremse1;
+
+    @Autowired
+    @Qualifier(value = "Seilzugbremse")
+    private Bremse bremse2;
+
     @GetMapping(value = "/hello", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String sayHello() {
+    public String sayHello(@RequestHeader("accept-language") String lang) {
+        System.out.println(lang);
+        bremse1.bremsen();
+        bremse2.bremsen();
         return "<h1>Hello World</h1>";
     }
 
