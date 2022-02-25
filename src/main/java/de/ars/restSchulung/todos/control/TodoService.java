@@ -2,12 +2,15 @@ package de.ars.restSchulung.todos.control;
 
 import de.ars.restSchulung.todos.boundary.Todo;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Service
+@Validated
 public class TodoService {
 
     //    @Autowired
@@ -32,5 +35,10 @@ public class TodoService {
     public void einfuegen(Todo todo) {
 //        repository.save(todo);
         todos.add(todo);
+    }
+
+    public void toWas(@Valid Todo todo) {
+        System.out.println(todo.getUuid());
+
     }
 }

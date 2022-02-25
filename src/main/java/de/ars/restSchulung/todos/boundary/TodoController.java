@@ -39,9 +39,8 @@ public class TodoController {
     }
 
     @PostMapping(value = "erstelleTodo")
-    public String erstelleTodo(@RequestParam String name, @RequestParam String prio, Model model) {
-        System.out.println("name = " + name + ", prio = " + prio);
-        Todo todo = new Todo(name, Integer.parseInt(prio));
+    public String erstelleTodo(@RequestParam String name, Integer prio, Model model) {
+        Todo todo = new Todo(name, prio);
         Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
         String message = "";
         for (ConstraintViolation<Todo> violation : violations) {

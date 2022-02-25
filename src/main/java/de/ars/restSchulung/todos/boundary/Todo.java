@@ -12,7 +12,8 @@ public class Todo {
 
     @ValidBezeichung
     private String name;
-    private int prioritaet;
+    @ValidPrio
+    private Integer prioritaet;
 
     public Todo() {
         uuid = UUID.randomUUID().toString();

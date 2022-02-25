@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
             <label for="prio">Priorität</label>
-            <input class="form-control" id="prio" name="prio" type="text">
+            <input class="form-control" id="prio" name="prio" type="number">
         </div>
         <button class="btn btn-primary" type="submit">Erstellen</button>
     </form>
