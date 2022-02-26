@@ -20,7 +20,7 @@
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log("Server accepted: " + xhr.responseText);
+                    location.href = "/todos";
                 }
             };
             xhr.send(data);
