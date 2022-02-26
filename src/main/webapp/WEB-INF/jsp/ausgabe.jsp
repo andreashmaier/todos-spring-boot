@@ -31,7 +31,7 @@
                 <c:forEach items="${todos}" var="todo">
                     <tbody>
                     <tr>
-                        <td><c:out value="${todo.name}"/></td>
+                        <td><c:out value="${todo.bezeichnung}"/></td>
                         <td><c:out value="${todo.prioritaet}"/></td>
                         <td><a class="btn btn-danger" href="loeschen?id=${todo.uuid}">Löschen</a></td>
                     </tr>

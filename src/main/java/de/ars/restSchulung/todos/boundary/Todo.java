@@ -11,7 +11,7 @@ public class Todo {
     private String uuid;
 
     @ValidBezeichung
-    private String name;
+    private String bezeichnung;
     @ValidPrio
     private Integer prioritaet;
 
@@ -19,23 +19,23 @@ public class Todo {
         uuid = UUID.randomUUID().toString();
     }
 
-    public Todo(String name) {
+    public Todo(String bezeichnung) {
         this();
-        this.name = name;
+        this.bezeichnung = bezeichnung;
     }
 
-    public Todo(String name, int prioritaet) {
+    public Todo(String bezeichnunug, int prioritaet) {
         this();
-        this.name = name;
+        this.bezeichnung = bezeichnunug;
         this.prioritaet = prioritaet;
     }
 
-    public String getName() {
-        return name;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
 
     public int getPrioritaet() {

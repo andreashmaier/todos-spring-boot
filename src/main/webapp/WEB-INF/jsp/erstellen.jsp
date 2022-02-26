@@ -15,8 +15,8 @@
     <p class="text-danger"><c:out value="${message}"/></p>
     <form action="erstelleTodo" method="post">
         <div class="form-group">
-            <label for="todo">Name</label>
-            <input class="form-control" id="todo" name="name" type="test">
+            <label for="todo">Bezeichnung</label>
+            <input class="form-control" id="todo" name="bezeichnung" type="test">
         </div>
         <div class="form-group">
             <label for="prio">Priorität</label>

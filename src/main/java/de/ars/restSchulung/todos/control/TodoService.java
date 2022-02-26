@@ -1,6 +1,9 @@
 package de.ars.restSchulung.todos.control;
 
 import de.ars.restSchulung.todos.boundary.Todo;
+import de.ars.restSchulung.todos.entity.TodoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -10,35 +13,31 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-@Validated
 public class TodoService {
 
-    //    @Autowired
-//    TodoRepository repository;
-    List<Todo> todos = new ArrayList<>();
+    @Autowired
+    TodoRepository repository;
 
     public TodoService() {
     }
 
+    public Todo findById(String uuid) {
+        return repository.findById(uuid).orElse(null);
+    }
+
     public Collection<Todo> getTodos() {
-//        return repository.findAll();
-        return todos;
+        return repository.findAll();
     }
 
     public void loechen(String id) {
-//        if (repository.existsById(id)) {
-//            repository.deleteById(id);
-//        }
-        todos.removeIf(todo -> todo.getUuid().equals(id));
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+        }
     }
 
     public void einfuegen(Todo todo) {
-//        repository.save(todo);
-        todos.add(todo);
+        repository.save(todo);
     }
 
-    public void toWas(@Valid Todo todo) {
-        System.out.println(todo.getUuid());
 
-    }
 }

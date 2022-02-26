@@ -28,8 +28,6 @@ public class HelloWorldController {
         System.out.println(lang);
         bremse1.bremsen();
         bremse2.bremsen();
-        Todo todo = new Todo("es");
-        todoService.toWas(todo);
         return "<h1>Hello World</h1>";
     }
 
