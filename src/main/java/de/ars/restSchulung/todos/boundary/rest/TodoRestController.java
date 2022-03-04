@@ -3,6 +3,7 @@ package de.ars.restSchulung.todos.boundary.rest;
 import de.ars.restSchulung.todos.boundary.Todo;
 import de.ars.restSchulung.todos.control.TodoService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +29,11 @@ public class TodoRestController {
         System.out.println(todo);
         todoService.einfuegen(todo);
         return ResponseEntity.ok(todo);
+    }
+
+    @DeleteMapping("{uuid}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable String uuid) {
+        todoService.loechen(uuid);
     }
 }
