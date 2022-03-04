@@ -8,12 +8,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/todos")
 public class TodoRestController {
 
     private TodoService todoService;
+
+    @GetMapping
+    public Collection<Todo> getTodos() {
+        return todoService.getTodos();
+    }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<Todo> findById(@PathVariable String uuid) {
