@@ -1,7 +1,7 @@
 package de.ars.restSchulung.todos.boundary;
 
 import de.ars.restSchulung.todos.control.TodoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +13,11 @@ import javax.validation.Validator;
 import java.util.Set;
 
 @Controller
+@AllArgsConstructor
 public class TodoController {
 
-    @Autowired
     private TodoService todoService;
 
-    @Autowired
     private Validator validator;
 
     @GetMapping(value = "/todos")

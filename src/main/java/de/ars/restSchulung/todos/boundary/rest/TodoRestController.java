@@ -2,16 +2,16 @@ package de.ars.restSchulung.todos.boundary.rest;
 
 import de.ars.restSchulung.todos.boundary.Todo;
 import de.ars.restSchulung.todos.control.TodoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/todos" )
+@RequestMapping("/api/v1/todos")
 public class TodoRestController {
 
-    @Autowired
     private TodoService todoService;
 
     @GetMapping("/{uuid}")
