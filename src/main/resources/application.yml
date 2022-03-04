@@ -1,3 +1,6 @@
+server:
+  error:
+    include-stacktrace: never
 spring:
   datasource:
     url: jdbc:h2:./.local-db/todos;DB_CLOSE_DELAY=-1;MODE=DB2;AUTO_SERVER=TRUE

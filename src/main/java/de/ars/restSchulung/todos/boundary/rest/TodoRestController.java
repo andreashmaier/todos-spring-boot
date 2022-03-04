@@ -1,5 +1,6 @@
 package de.ars.restSchulung.todos.boundary.rest;
 
+import de.ars.restSchulung.todos.boundary.NotFoundException;
 import de.ars.restSchulung.todos.boundary.Todo;
 import de.ars.restSchulung.todos.control.TodoService;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class TodoRestController {
 
     private TodoService todoService;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<Todo> getTodos() {
         return todoService.getTodos();
     }
@@ -26,7 +27,7 @@ public class TodoRestController {
     public ResponseEntity<Todo> findById(@PathVariable String uuid) {
         Todo todo = todoService.findById(uuid);
         if (todo == null) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Todo mit uuid " + uuid + " nicht vorhanden!");
         }
         return ResponseEntity.ok(todo);
     }
