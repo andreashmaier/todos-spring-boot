@@ -27,6 +27,14 @@ public class TodoService {
         }
     }
 
+    public boolean update(Todo todo) {
+        if (repository.existsById(todo.getUuid())) {
+            repository.save(todo);
+            return true;
+        }
+        return false;
+    }
+
     public void einfuegen(Todo todo) {
         repository.save(todo);
     }

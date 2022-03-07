@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0.0"
+  title: "Swagger Todos"
+servers:
+  - url: http://localhost/api/vi
+tags:
+  - name: "todos"
+    description: "Operationen mit todos"
+paths:
+  /todos:
+    get:
+      summary: Listet alle Todos auf
+      tags:
+        - "todos"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Todo"
+components:
+  schemas:
+    Todo:
+      type: object
+      required:
+        - bezeichnung
+        - prioritaet
+      properties:
+        uuid:
+          type: "string"
+        bezeichnung:
+          type: "string"
+        prioritaet:
+          type: "integer"
+    Todos:
+      type: array
+      items:
+        $ref: "#/components/schemas/Todo"

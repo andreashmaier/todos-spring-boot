@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ValidationException;
 import java.util.Collection;
 
 @AllArgsConstructor
@@ -35,6 +36,9 @@ public class TodoRestController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Todo> insert(@RequestBody Todo todo) {
         System.out.println(todo);
+//        RestTemplate restTemplate = new RestTemplate();
+//        Quota quota = restTemplate.getForObject("http://localhost:8081/api/v1/quotas/Andreas", Quota.class);
+//        System.out.println(quota);
         todoService.einfuegen(todo);
         return ResponseEntity.ok(todo);
     }
@@ -43,5 +47,16 @@ public class TodoRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable String uuid) {
         todoService.loechen(uuid);
+    }
+
+    @PutMapping(value = "/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable String uuid, @RequestBody Todo todo) {
+        if (!uuid.equals(todo.getUuid())) {
+            throw new ValidationException();
+        }
+        if (!todoService.update(todo)) {
+            throw new NotFoundException();
+        }
     }
 }
