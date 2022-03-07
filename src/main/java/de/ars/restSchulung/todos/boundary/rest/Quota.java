@@ -1,12 +1,13 @@
 package de.ars.restSchulung.todos.boundary.rest;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Quota {
 
     private String besitzer;
+    @Setter(AccessLevel.NONE)
     private int grenze;
 }

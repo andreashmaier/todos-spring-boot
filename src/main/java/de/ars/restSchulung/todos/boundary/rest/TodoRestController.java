@@ -6,15 +6,19 @@ import de.ars.restSchulung.todos.control.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import javax.validation.ValidationException;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/todos")
+@Validated
 public class TodoRestController {
 
     private TodoService todoService;
@@ -25,23 +29,31 @@ public class TodoRestController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<Todo> findById(@PathVariable String uuid) {
+    public Todo findById(@PathVariable String uuid) {
         Todo todo = todoService.findById(uuid);
         if (todo == null) {
             throw new NotFoundException("Todo mit uuid " + uuid + " nicht vorhanden!");
         }
-        return ResponseEntity.ok(todo);
+        return todo;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Todo> insert(@RequestBody Todo todo) {
-        System.out.println(todo);
-//        RestTemplate restTemplate = new RestTemplate();
-//        Quota quota = restTemplate.getForObject("http://localhost:8081/api/v1/quotas/Andreas", Quota.class);
-//        System.out.println(quota);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Todo insert(@Valid @NotNull @RequestBody Todo todo) {
+        RestTemplate restTemplate = new RestTemplate();
+        Quota quota = restTemplate.getForObject("http://localhost:9080/api/v1/quotas/Andreas", Quota.class);
+        System.out.println(quota);
         todoService.einfuegen(todo);
-        return ResponseEntity.ok(todo);
+        return todo;
     }
+
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Void> insertTodo(@RequestBody Todo todo) {
+//        todoService.einfuegen(todo);
+//        String uuid = todo.getUuid();
+//        URI location = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(TodoRestController.class).findById(uuid)).toUri();
+//        return ResponseEntity.created(location).build();
+//    }
 
     @DeleteMapping("{uuid}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
