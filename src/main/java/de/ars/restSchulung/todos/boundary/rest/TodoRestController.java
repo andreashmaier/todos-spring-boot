@@ -2,8 +2,11 @@ package de.ars.restSchulung.todos.boundary.rest;
 
 import de.ars.restSchulung.todos.boundary.NotFoundException;
 import de.ars.restSchulung.todos.boundary.Todo;
+import de.ars.restSchulung.todos.boundary.TodoController;
 import de.ars.restSchulung.todos.control.TodoService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +17,8 @@ import javax.validation.Valid;
 import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @AllArgsConstructor
 @RestController
@@ -29,12 +34,13 @@ public class TodoRestController {
     }
 
     @GetMapping("/{uuid}")
-    public Todo findById(@PathVariable String uuid) {
+    public EntityModel<Todo> findById(@PathVariable String uuid) {
         Todo todo = todoService.findById(uuid);
         if (todo == null) {
             throw new NotFoundException("Todo mit uuid " + uuid + " nicht vorhanden!");
         }
-        return todo;
+        return EntityModel.of(todo, linkTo(methodOn(TodoRestController.class).findById(uuid)).withSelfRel(),
+                linkTo(methodOn(TodoRestController.class).getTodos()).withRel("todos"));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
